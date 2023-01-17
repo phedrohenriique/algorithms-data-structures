@@ -58,8 +58,6 @@ def creating_graph():
 
     for airport in airports:
         add_node(airport)
-    
-    # print(adjacency_list)
 
     add_edge(routes)
     print("Adjacency List from Graph : ", adjacency_list)
@@ -159,6 +157,7 @@ def bfs(start, goal, adjacency_list):
 def bfs_allpaths(start, goal, adjacency_list):
     # Queue for storing the paths
     queue = [[start]]
+
     path_list = []
     solution_list = []
     
@@ -209,11 +208,63 @@ def bfs_allpaths(start, goal, adjacency_list):
 
     return solution_list
 
+def dfs_allpaths(start_node,end_node ,checked_nodes = set(), path = []):
+
+    print(start_node)
+    checked_nodes.add(start_node)
+    neighbours_nodes = adjacency_list[start_node]
+    path.append(start_node)
+
+
+    for node in neighbours_nodes:
+
+        if node == end_node:
+            print(node)
+            print('Destinaton Found : ', node)
+            path.append(node)
+            print(path)
+            return
+
+        if node not in checked_nodes:
+            dfs_allpaths(node, end_node)
+
+
+    ###########################################################
+    # dfs algorithm working below
+
+    # print(start_node)
+    # checked_nodes.add(start_node)
+    # neighbours_nodes = adjacency_list[start_node]
+
+    # for node in neighbours_nodes:
+
+    #     if node == end_node:
+    #         print('Destinaton Found : ', node);
+    #         return
+
+    #     if node not in checked_nodes:
+    #         dfs_allpaths(node, end_node)
+
+    
+    # needs to use a recursive function
+
+    # queue = [[start_node]]
+    # path_list = []
+    # path = queue.pop(0)
+    # node = path[-1] # getting last node from path
+    # checked_nodes.add(node) # adding node to the checked nodes
+
+    #list = adjacency_list[node]
+
+      
+    
+
 if __name__ == "__main__":
     print("starting script")
-    creating_graph()
-    print(bfs_algorithm("PHX", "BKK")) # this should print the list of solution paths
+    creating_graph(),
+    #print(bfs_algorithm("PHX", "BKK")) # this should print the list of solution paths
     #print("Solution of Graph : ", bfs("PHX", "BKK", adjacency_list))
     #print("Solution of Graph : ", bfs_allpaths("PHX", "BKK", adjacency_list))
+    print("Solution of Graph : ", dfs_allpaths("PHX", "BKK"))
 
     
